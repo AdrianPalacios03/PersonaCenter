@@ -22,6 +22,7 @@ export const NavBar = ({
 
     return (
         <>
+            <div className="status-bar"/>
             <nav style={{
                 height: height ? `${height}px` : "60px",
                 backgroundColor: backgroundColor ? backgroundColor : "#fff",
@@ -44,6 +45,18 @@ export const NavBar = ({
                 {/* Páginas mobile */}
                 
             </nav>
+            <div onClick={toggleSidebar} style={{
+                backgroundColor: 'rgba(0, 0, 0, 0.5)' ,
+                position: 'fixed',
+                width: '100%',
+                height: '100vh',
+                top: '0px',
+                left: '0px',
+                zIndex: 100,
+                cursor: 'pointer',
+                display: showSidebar ? 'block' : 'none'
+            
+            }}/>
             <div  
                 className="sidebar-container"
                 style={{

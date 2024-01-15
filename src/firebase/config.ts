@@ -1,5 +1,6 @@
 
 import { initializeApp } from "firebase/app";
+import { ReCaptchaV3Provider, initializeAppCheck } from "firebase/app-check";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getFirestore as getDB } from "firebase/firestore/lite";
@@ -18,3 +19,7 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseDB = getFirestore(firebaseApp);
 export const personaDB  = getDB(firebaseApp);
 export const firebaseAuth = getAuth(firebaseApp);
+
+initializeAppCheck(firebaseApp, {
+  provider: new ReCaptchaV3Provider('6LeFAlEpAAAAAIsI82SvfgqAYh99pltCD56Te6Zl' ),
+});

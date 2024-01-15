@@ -1,0 +1,23 @@
+{
+    "background_color": "#141414",
+    "categories": ["lifestyle", "music"],
+    "description": "Persona Center",
+    "dir": "ltr",
+    "display_override": ["standalone", "fullscreen"],
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "./ic.png",
+            "sizes": "230x230",
+            "type": "image/png"
+        }
+    ],
+    "lang": "es-MX",
+    "name": "Persona Center",
+    "orientation": "portrait",
+    "prefer_related_application": false,
+    "scope": "/",
+    "short_name": "Center",
+    "start_url": "/",
+    "theme_color": "#000000"
+  }

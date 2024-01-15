@@ -24,6 +24,10 @@ export interface DebtorProps {
     onclick: (debtor: string) => void
 }
 
+export interface PlusButtonProps {
+    onClick: () => void
+}
+
 interface NavBarItem {
     name: string,
     url: string,

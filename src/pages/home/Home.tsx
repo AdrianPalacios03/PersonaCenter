@@ -136,11 +136,6 @@ export const Home = () => {
                     })
                 }
             </div>
-
-            <div>
-                <button onClick={saveClients} className='btn'><i className='fa-solid fa-floppy-disk'/> SAVE</button>
-            </div>
-
             <PopUp 
                 visible={popUpOpen}
                 onClose={onPopUpClose} 
@@ -196,7 +191,7 @@ export const Home = () => {
                 </div>
             }
 
-            <PlusButton/>
+            <PlusButton onClick={saveClients}/>
         </div>
     )
 }

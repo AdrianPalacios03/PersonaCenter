@@ -1,7 +1,9 @@
 import * as stylex from '@stylexjs/stylex';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import { togglePopUp } from '../../../store/slices/popUp/popUpSlice';
-export const PlusButton = () => {
+import { PlusButtonProps } from '../../../interfaces/componentProps';
+
+export const PlusButton = ({onClick}: PlusButtonProps) => {
 
     const dispatch = useAppDispatch();
     const popUpOpen = useAppSelector((state) => state.popUp.open);
@@ -11,9 +13,17 @@ export const PlusButton = () => {
     }
 
     return (
-        <div {...stylex.props(s.div)} onClick={handlePlusClick}>
-            <i className='fa-solid fa-plus'/>
-        </div>
+        <>
+            <div {...stylex.props(s.div)} onClick={handlePlusClick}>
+                <i className='fa-solid fa-plus'/>
+            </div>
+
+            <div {...stylex.props(s.div, s.saveBtn)} onClick={onClick}>
+                <i className='fa-solid fa-floppy-disk'/>
+            </div>
+
+
+        </>
     )
 }
 
@@ -37,5 +47,8 @@ const s = stylex.create({
         ':hover': {
             transform: 'scale(1.1)'
         }
+    },
+    saveBtn: {
+        bottom: '7rem',
     }
 });

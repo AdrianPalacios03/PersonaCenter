@@ -19,7 +19,7 @@ export const runPaymentVerification = async (user: User, clients: Client[], setC
             // * 4. Si tienen pagos pendientes, agregarlos a un debtors array
             if (!client.alreadyPaid) {
                 debtors.push(
-                    `${client.fullName} debe ${currentMonth} por ${client.price}`
+                    `${client.fullName} debe ${dbMonth} por ${client.price}`
                 );
             }
             // * 5. Resetear el alreadyPaid de todos los clientes
