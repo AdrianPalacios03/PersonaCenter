@@ -42,7 +42,8 @@ nav {
 .sidebar-container a {
     color: white;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 20px;
+    text-wrap: nowrap;
     font-weight: 500;
     padding: 5px 20px;
     border-radius: 8px;

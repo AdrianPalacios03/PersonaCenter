@@ -5,7 +5,9 @@ import globe from "../../../assets/globe.webp"
 import wp from "../../../assets/wp-icon.webp"
 import * as stylex from '@stylexjs/stylex';
 
-export const ClientCard = ({fullName, website, googleAdsLink, googleMapsLink, phoneNumber, category, price, paymentDate, onClick}: ClientCardProps) => {
+export const ClientCard = ({client, onClick, handlePaidCheckbox}: ClientCardProps) => {
+
+    const {fullName, price, paymentDate, website, googleAdsLink, googleMapsLink, phoneNumber, alreadyPaid, category} = client;
 
     return (
         <div className="client-card" {...stylex.props(s.container)} onDoubleClick={onClick}>
@@ -23,17 +25,16 @@ export const ClientCard = ({fullName, website, googleAdsLink, googleMapsLink, ph
                 <a href={googleAdsLink} target="_blank"><img {...stylex.props(s.icon)} src={adsLogo}/></a>
                 <a href={googleMapsLink} target="_blank"><img {...stylex.props(s.icon)} src={mapsLogo}/></a>
                 <a href={`https://wa.me/${phoneNumber}`}><img {...stylex.props(s.icon)} src={wp}/></a>
+                <input {...stylex.props(s.checkBox)} type="checkbox" checked={alreadyPaid} onChange={() => {handlePaidCheckbox(website)}}/>
                 {
                     category === 'nut'
                     ?
                     <div {...stylex.props(s.catLabel, s.nutriLabel)}>
                         <i className='fa-solid fa-apple-whole'/>
-                        <p>Nutriólogo</p>
                     </div>
                     :
                     <div {...stylex.props(s.catLabel, s.psycoLabel)}>
                         <i className='fa-solid fa-brain'/>
-                        <p>Psicólogo</p>
                     </div>
                 }
             </div>
@@ -74,10 +75,11 @@ const s = stylex.create({
     clientInfo: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '5px'
+        gap: '5px',
     },
-
+    
     clientInfoItem: {
+        fontWeight: 'bold',
         margin: 0,
         padding: 0,
         minWidth: 150,
@@ -113,6 +115,21 @@ const s = stylex.create({
         gap: '5px',
         padding: '2px 10px',
         borderRadius: 5,
+    },
+
+    checkBox: {
+        marginRight: {
+            default: 10,
+            '@media (max-width: 690px)': 20
+        },
+        marginLeft: {
+            default: 0,
+            '@media (max-width: 690px)': 10
+        },
+        transform: {
+            default: 'scale(1.1)',
+            '@media (max-width: 690px)': 'scale(1.5)'
+        }
     },
 
     // create psycologist and nutriologist labels, one with soft purple and the other with soft green as background and hard purple and green as color

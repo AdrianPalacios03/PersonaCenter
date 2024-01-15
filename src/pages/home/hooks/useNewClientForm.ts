@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ClientCardProps } from "../../../interfaces/componentProps";
+import { Client } from "../../../interfaces/componentProps";
 
-export const clientInitialState: ClientCardProps = {
+export const clientInitialState: Client = {
   fullName: '',
   website: '',
   googleAdsLink: '',
@@ -9,10 +9,11 @@ export const clientInitialState: ClientCardProps = {
   phoneNumber: '',
   category: 'nut',
   price: '',
+  alreadyPaid: false,
   paymentDate: '',
 } 
 
-export const useNewClientForm = ( initialForm: ClientCardProps = clientInitialState) => {
+export const useNewClientForm = ( initialForm: Client = clientInitialState) => {
 
     const [formState, setFormState] = useState(initialForm)
 
@@ -28,7 +29,7 @@ export const useNewClientForm = ( initialForm: ClientCardProps = clientInitialSt
       });
     }
 
-    const setClientForm = (client: ClientCardProps) => {
+    const setClientForm = (client: Client) => {
       setFormState(client)
     }
 

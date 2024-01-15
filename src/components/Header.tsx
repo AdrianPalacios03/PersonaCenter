@@ -36,7 +36,7 @@ export const NavBar = ({
 
                 </div>
                 <NavLink to="/" {...stylex.props(s.logo)}>
-                    <img src={logo} alt="Logo de All Consulting Group" {...stylex.props(s.logoImg)}/>
+                    <img src={logo} alt="Logo de Persona" {...stylex.props(s.logoImg)}/>
 
                     <p>Center</p>
                 </NavLink>

@@ -1,16 +1,28 @@
-export interface ClientCardProps {
+export interface Client {
     fullName: string,
     website: string,
     googleAdsLink: string,
     googleMapsLink: string,
     phoneNumber: string,
-    category: Client,
+    category: ClientType,
     price: string,
     paymentDate: string,
+    alreadyPaid: boolean,
     onClick?: () => void
 }
 
-export type Client = 'nut' | 'psic'
+export type ClientType = 'nut' | 'psic'
+
+export interface ClientCardProps {
+    client: Client,
+    onClick?: () => void
+    handlePaidCheckbox: (website: string) => void
+}
+
+export interface DebtorProps {
+    debtor: string,
+    onclick: (debtor: string) => void
+}
 
 interface NavBarItem {
     name: string,

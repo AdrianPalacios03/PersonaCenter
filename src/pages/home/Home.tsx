@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex';
 import { useEffect, useState } from 'react';
 import { ClientCard } from './components/ClientCard';
-import { ClientCardProps } from '../../interfaces/componentProps';
+import { Client } from '../../interfaces/componentProps';
 import { getClients } from '../../database/getClients';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { saveClientsList } from '../../database/saveClientList';
@@ -10,13 +10,17 @@ import PopUp from './components/PopUp';
 import { togglePopUp } from '../../store/slices/popUp/popUpSlice';
 import { clientInitialState, useNewClientForm } from './hooks/useNewClientForm';
 import { runPaymentVerification } from '../../database/runPaymentVerification';
+import { getCurrentMonth } from '../../util/getCurrentMonth';
+import { setDebtors } from '../../database/DBDebtors';
+import { Debtor } from './components/Debtor';
 export const Home = () => {
 
     const user = useAppSelector((state) => state.auth.user);
     const popUpOpen = useAppSelector((state) => state.popUp.open);
     const dispatch = useAppDispatch();
-    const [clientsList, setClientsList] = useState<ClientCardProps[]>([]);
+    const [clientsList, setClientsList] = useState<Client[]>([]);
     const { formState, onInputChange, setClientForm } = useNewClientForm();
+    const [debtorsList, setDebtorsList] = useState<string[] | undefined>([])
     const [edittingClient, setEdittingClient] = useState({
             editting: false,
             client: clientInitialState
@@ -24,17 +28,16 @@ export const Home = () => {
     );
 
     const fetchClients = async () => {
-        await getClients(user).then((clients) => {
-        setClientsList(clients);
-        }).finally(() => {
-            runPaymentVerification(user!, clientsList);
+        await getClients(user).then(async (clients) => {
+            setClientsList(clients);
+            await runPaymentVerification(user!, clients, setClientsList).then((data) => {
+                setDebtorsList(data);
+            });
         })
     }
 
     useEffect(() => {
         fetchClients();
-
-
     }, []);
 
     const saveClients = () => {
@@ -64,7 +67,7 @@ export const Home = () => {
         dispatch(togglePopUp(false));
     }
 
-    const handleClientClick = (client: ClientCardProps) => {
+    const handleClientClick = (client: Client) => {
         setClientForm(client);
         setEdittingClient({
             editting: true,
@@ -92,18 +95,43 @@ export const Home = () => {
             client: clientInitialState
         });
     }
+
+    const handlePaidCheckbox = (website: string) => {
+        const newClientsList = clientsList.map((c) => {
+            if (c.website === website) {
+                return {
+                    ...c,
+                    alreadyPaid: !c.alreadyPaid
+                }
+            }
+            return c;
+        });
+        setClientsList(newClientsList);
+    }
+
+    const onDeleteDebtor = (debtor: string) => {
+        if (confirm(`Are you sure you want to delete ${debtor}?`) === false) return;
+        const newDebtorsList = debtorsList?.filter((d) => d !== debtor);
+        setDebtorsList(newDebtorsList);
+        setDebtors(user!, newDebtorsList!);
+    }
     
 
     return (
         <div {...stylex.props(s.container)}>
 
-            <h1>Clients</h1>
+            <h1>Clients <span {...stylex.props(s.month)}>~ {getCurrentMonth().fullDate}</span></h1>
             
             <div {...stylex.props(s.clientsContainer)}>
                 {
                     clientsList.map((client) => {
                         return (
-                            <ClientCard {...client} onClick={() => handleClientClick(client)} key={client.website}/>
+                            <ClientCard 
+                                client={client}
+                                onClick={() => handleClientClick(client)} 
+                                handlePaidCheckbox={handlePaidCheckbox}
+                                key={client.website}
+                            />
                         )
                     })
                 }
@@ -151,6 +179,23 @@ export const Home = () => {
                 </div>
             </PopUp>
 
+            {
+                debtorsList?.length !== 0
+                &&
+                <div>
+                    <h2>Debtors</h2>
+                    <ul {...stylex.props(s.dList)}>
+                        {
+                            debtorsList?.map((debtor, index) => {
+                                return (
+                                    <Debtor debtor={debtor} onclick={() => onDeleteDebtor(debtor)} key={index}/>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            }
+
             <PlusButton/>
         </div>
     )
@@ -174,6 +219,12 @@ const s = stylex.create({
         alignItems: 'center'
 
     },
+    month: {
+        color: 'grey',
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+        marginLeft: '1rem'
+    },
     popUp: {
         display: 'flex',
         flexDirection: 'column',
@@ -190,6 +241,15 @@ const s = stylex.create({
         gap: '1rem',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    dList: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '100%',
+        alignItems: 'flex-start',
+        listStyle: 'none',
+        marginTop: '20px'
     }
 
 });
