@@ -57,11 +57,24 @@ select option {
   color: rgba(240, 248, 255, 0.493);
 }
 
+.fa-rotate-right {
+  color: grey;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
 .fa-pen-to-square {
   font-size: 1.4rem;
   color: white;
   cursor: pointer;
+}
 
+.fa-chevron-down {
+  transition: all 0.2s ease-in-out;
+}
+
+.turned-chevron {
+  transform: rotate(180deg);
 }
 
 @keyframes fadeLeft {

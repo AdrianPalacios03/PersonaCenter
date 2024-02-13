@@ -9,6 +9,7 @@ import { toggleTodoPopUp } from '../../store/slices/popUp/popUpSlice';
 import PopUp from '../home/components/PopUp';
 import { PlusButton } from '../home/components/PlusButton';
 import { TodoCard } from './components/TodoCard';
+import { sToast } from '../../util/toast';
 
 export const Todos = () => {
 
@@ -19,10 +20,11 @@ export const Todos = () => {
     const [styleValue, setStyleValue] = useState(false)
     const { formState, onInputChange, setTodoForm } = useNewTodoForm();
     const [edittingTodo, setEdittingTodo] = useState({
-            editting: false,
-            todo: todoInitialState
-        }
+        editting: false,
+        todo: todoInitialState
+    }
     );
+    const [showDList, setShowDList] = useState(false);
 
     const fetchTodos = async () => {
         await getTodos(user).then(async (todos) => {
@@ -50,6 +52,7 @@ export const Todos = () => {
     }
 
     const handleSaveTodo = () => {
+        if (!formState.title) return sToast('Title is required', true);
         const editting = edittingTodo.editting;
 
         if (editting) {
@@ -110,19 +113,30 @@ export const Todos = () => {
         });
         setTodosList(newTodosList);
     }
+
+    const sortPriority = (a: Todo, b: Todo) => {
+        const prioridades = { red: 1, blue: 2, green: 3, none: 4};
+        const prioridadA = prioridades[a.priority] || 9999;
+        const prioridadB = prioridades[b.priority] || 9999;
+    
+        return prioridadA - prioridadB;
+    }
     
 
     return (
         <div {...stylex.props(s.container)}>
 
-            <h1 onClick={changeStyle}>To do's</h1>
+            <div {...stylex.props(s.title)}>
+                <h1 onClick={changeStyle}>To do's</h1>
+                <i className='fa-solid fa-rotate-right' onClick={fetchTodos}/>
+            </div>
 
             <div {...stylex.props(s.todosContainer)}>
                 {
-                    todosList.length === 0
+                    todosList.filter((todo) => !todo.done).length === 0
                     ? <h3>Que vacío...</h3>
                     :
-                        todosList.map((todo) => {
+                        todosList.filter((todo) => !todo.done).sort(sortPriority) .map((todo) => {
                             return (
                                 <TodoCard 
                                     todo={todo}
@@ -135,6 +149,25 @@ export const Todos = () => {
                         })
                 }
             </div>
+
+            <h2 {...stylex.props(s.dListTitle)} onClick={() => setShowDList(!showDList)}
+            >Done <i className={`fa-solid fa-chevron-down ${showDList && 'turned-chevron'} `}/></h2>
+            <div {...stylex.props(showDList ? s.dList : s.dNone)}>
+                {
+                    todosList.filter((todo) => todo.done).map((todo) => {
+                        return (
+                            <TodoCard 
+                                todo={todo}
+                                onClick={() => handleTodoClick(todo)} 
+                                onDoneCheckbox={handleDoneCheckbox}
+                                style1={styleValue}
+                                key={todo.title}
+                            />
+                        )
+                    })
+                }
+            </div>
+
             <PopUp
                 visible={popUpOpen}
                 onClose={onPopUpClose} 
@@ -184,6 +217,12 @@ const s = stylex.create({
         maxWidth: '1000px',
         margin: '0 auto',
     },
+    title: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        animation: 'fadeLeft .3s'
+    },
     todosContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -230,6 +269,19 @@ const s = stylex.create({
         alignItems: 'flex-start',
         listStyle: 'none',
         marginTop: '20px'
-    }
+    },
+    dListTitle: {
+        transition: 'all .3s',
+        alignSelf: 'flex-start',
+        padding: '5px 10px',
+        borderRadius: '5px',
+        ':hover': {
+            cursor: 'pointer',
+            backgroundColor: 'rgba(255, 255, 255, .05)',
+        }
+    },
+    dNone: {
+        display: 'none !important'
+    },
 
 });
