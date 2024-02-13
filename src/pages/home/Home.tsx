@@ -21,6 +21,7 @@ export const Home = () => {
     const [clientsList, setClientsList] = useState<Client[]>([]);
     const { formState, onInputChange, setClientForm } = useNewClientForm();
     const [debtorsList, setDebtorsList] = useState<string[] | undefined>([])
+    const [profitValue, setProfitValue] = useState(0)
     const [edittingClient, setEdittingClient] = useState({
             editting: false,
             client: clientInitialState
@@ -30,6 +31,11 @@ export const Home = () => {
     const fetchClients = async () => {
         await getClients(user).then(async (clients) => {
             setClientsList(clients);
+            let profit = 0;
+            clients.map((client: Client) => {
+                profit += parseInt(client.profit);
+            })
+            setProfitValue(profit);
             await runPaymentVerification(user!, clients, setClientsList).then((data) => {
                 setDebtorsList(data);
             });
@@ -65,6 +71,7 @@ export const Home = () => {
         }
 
         dispatch(togglePopUp(false));
+        onPopUpClose();
     }
 
     const handleClientClick = (client: Client) => {
@@ -121,7 +128,12 @@ export const Home = () => {
         <div {...stylex.props(s.container)}>
 
             <h1>Clients <span {...stylex.props(s.month)}>~ {getCurrentMonth().fullDate}</span></h1>
+
+            {
+                clientsList.length !== 0 && <h2 {...stylex.props(s.profit)}>Profit: <span {...stylex.props(s.profitNum)}>${profitValue.toLocaleString("en-US")}</span></h2>
+            }
             
+
             <div {...stylex.props(s.clientsContainer)}>
                 {
                     clientsList.map((client) => {
@@ -156,6 +168,7 @@ export const Home = () => {
                 <input type='text' name='googleMapsLink' placeholder='Maps link' value={formState.googleMapsLink} onChange={handleInputChange}/>
                 <input type='text' name='phoneNumber' placeholder='Phone number' value={formState.phoneNumber} onChange={handleInputChange}/>
                 <input type='text' name='price' placeholder='Price' value={formState.price} onChange={handleInputChange}/>
+                <input type='text' name='profit' placeholder='Profit' value={formState.profit} onChange={handleInputChange}/>
                 <input type='text' name='paymentDate' placeholder='Payment Date' value={formState.paymentDate} onChange={handleInputChange}/>
                 <select {...stylex.props(s.select)} name='category' value={formState.category} onChange={handleInputChange}>
                     <option value='nut'>Nutriologo</option>
@@ -213,6 +226,13 @@ const s = stylex.create({
         width: '100%',
         alignItems: 'center'
 
+    },
+    profit: {
+        color: 'white',
+        animation: 'fadeLeft .3s'
+    },
+    profitNum: {
+        color: 'grey'
     },
     month: {
         color: 'grey',

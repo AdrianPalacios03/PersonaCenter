@@ -1,15 +1,19 @@
 import * as stylex from '@stylexjs/stylex';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
-import { togglePopUp } from '../../../store/slices/popUp/popUpSlice';
+import { togglePopUp, toggleTodoPopUp } from '../../../store/slices/popUp/popUpSlice';
 import { PlusButtonProps } from '../../../interfaces/componentProps';
 
-export const PlusButton = ({onClick}: PlusButtonProps) => {
+export const PlusButton = ({onClick, todosBtn = false}: PlusButtonProps) => {
 
     const dispatch = useAppDispatch();
     const popUpOpen = useAppSelector((state) => state.popUp.open);
 
     const handlePlusClick = () => {
-        dispatch(togglePopUp(!popUpOpen));
+        if (todosBtn) {
+            dispatch(toggleTodoPopUp(true));
+        } else {
+            dispatch(togglePopUp(!popUpOpen));
+        }
     }
 
     return (
@@ -38,7 +42,7 @@ const s = stylex.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        boxShadow: '0 0 10px rgba(255,255,255,0.3)',
+        boxShadow: '0 2px 6px rgba(255,255,255,0.3)',
         cursor: 'pointer',
         transition: 'all 0.3s ease',
         color: 'white',

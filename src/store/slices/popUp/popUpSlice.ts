@@ -2,11 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface AuthState {
     open: boolean;
+    todoOpen: boolean;
 }
 
 // Define the initial state using that type
 const initialState: AuthState = {
     open: false,
+    todoOpen: false
 }
 
 export const popUpSlice = createSlice({
@@ -16,7 +18,10 @@ export const popUpSlice = createSlice({
         togglePopUp: ( state, action: PayloadAction<boolean> ) => {
             state.open = action.payload;
         },
+        toggleTodoPopUp: ( state, action: PayloadAction<boolean> ) => {
+            state.todoOpen = action.payload;
+        }
     }
 });
 
-export const { togglePopUp } = popUpSlice.actions;
+export const { togglePopUp, toggleTodoPopUp } = popUpSlice.actions;

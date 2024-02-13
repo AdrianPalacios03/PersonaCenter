@@ -14,16 +14,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <NavBar
           routes={[
             {
-              name: 'Clients',
+              name: 'Menu',
               url: '/'
             },
             {
-              name: 'El camino',
-              url: 'el-camino'
+              name: 'Clients',
+              url: 'clients'
             },
             {
-              name: 'Earnings',
-              url: 'earnings'
+              name: "To do's",
+              url: 'todos'
             }
           ]}
           backgroundColor='rgba(0, 0, 0, 0)'

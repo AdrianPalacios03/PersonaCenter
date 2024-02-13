@@ -1,20 +1,14 @@
 import { useState } from "react";
-import { Client } from "../../../interfaces/componentProps";
+import { Todo } from "../../../interfaces/componentProps";
 
-export const clientInitialState: Client = {
-  fullName: '',
-  website: '',
-  googleAdsLink: '',
-  googleMapsLink: '',
-  phoneNumber: '',
-  category: 'nut',
-  price: '',
-  profit: '',
-  alreadyPaid: false,
-  paymentDate: '',
+export const todoInitialState: Todo = {
+    title: '',
+    description: '',
+    done: false,
+    priority: 'none',
 } 
 
-export const useNewClientForm = ( initialForm: Client = clientInitialState) => {
+export const useNewTodoForm = ( initialForm: Todo = todoInitialState) => {
 
     const [formState, setFormState] = useState(initialForm)
 
@@ -30,7 +24,7 @@ export const useNewClientForm = ( initialForm: Client = clientInitialState) => {
       });
     }
 
-    const setClientForm = (client: Client) => {
+    const setTodoForm = (client: Todo) => {
       setFormState(client)
     }
 
@@ -38,7 +32,7 @@ export const useNewClientForm = ( initialForm: Client = clientInitialState) => {
         ...formState,
         formState,
         onInputChange,
-        setClientForm,
+        setTodoForm,
         resetState
 
     }

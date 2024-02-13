@@ -6,6 +6,7 @@ export interface Client {
     phoneNumber: string,
     category: ClientType,
     price: string,
+    profit: string,
     paymentDate: string,
     alreadyPaid: boolean,
     onClick?: () => void
@@ -25,8 +26,28 @@ export interface DebtorProps {
 }
 
 export interface PlusButtonProps {
-    onClick: () => void
+    onClick: () => void,
+    todosBtn?: boolean
 }
+
+export interface Todo {
+    title: string,
+    description?: string,
+    done: boolean,
+    priority: TodoPriority,
+}
+
+export interface TodoCardProps {
+    todo: Todo,
+    onClick: () => void,
+    onDoneCheckbox: (title: string) => void,
+    style1?: boolean
+}
+
+
+type TodoPriority = 'none' | 'green' | 'blue' | 'red'
+
+
 
 interface NavBarItem {
     name: string,

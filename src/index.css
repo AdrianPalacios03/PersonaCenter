@@ -56,3 +56,21 @@ select option {
 ::placeholder {
   color: rgba(240, 248, 255, 0.493);
 }
+
+.fa-pen-to-square {
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

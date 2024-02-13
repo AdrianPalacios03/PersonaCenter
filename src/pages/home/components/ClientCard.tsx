@@ -64,7 +64,9 @@ const s = stylex.create({
         ':hover': {
             background: 'rgba(255,255,255,0.1)',
         },
-        userSelect: 'none'
+        userSelect: 'none',
+
+        animation: 'fadeLeft .3s'
     },
 
     client: {

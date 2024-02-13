@@ -7,9 +7,14 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "./ic.png",
+            "src": "./ic-64.svg",
+            "sizes": "64x64",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "./ic.svg",
             "sizes": "230x230",
-            "type": "image/png"
+            "type": "image/svg+xml"
         }
     ],
     "lang": "es-MX",
