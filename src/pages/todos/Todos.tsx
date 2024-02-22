@@ -29,15 +29,19 @@ export const Todos = () => {
     const fetchTodos = async () => {
         await getTodos(user).then(async (todos: Todo[]) => {
             // Buscar todo que tenga el titulo "1200 de la semana", si existe y hoy es miércoles, cambiar su done a false
-            const today = new Date();
-            const day = today.getDay();
-            const weekDay = day === 0 ? 6 : day - 1;
-            const weekDayTodos = todos.filter((todo: Todo) => todo.title.includes('1200 de la semana') && todo.done);
-            const weekDayTodo = weekDayTodos.find((todo: Todo) => todo.title.includes(weekDay.toString()));
-            if (weekDayTodo) {
-                weekDayTodo.done = false;
-                setTodosList(todos);
-                saveTodosList(user, {todos: todos}, false );
+            const isWed = new Date().getDay() === 3;
+
+            if (isWed) {
+                const newTodosList = todos.map((todo) => {
+                    if (todo.title === '1200 de la semana') {
+                        return {
+                            ...todo,
+                            done: false
+                        }
+                    }
+                    return todo;
+                });
+                setTodosList(newTodosList);
             } else {
                 setTodosList(todos);
             }
@@ -61,7 +65,7 @@ export const Todos = () => {
     }, [todosList])
 
     const saveTodos = () => {
-        saveTodosList(user, {todos: todosList});
+        saveTodosList(user, {todos: todosList})
     }
 
     const handleInputChange = (e: any) => {

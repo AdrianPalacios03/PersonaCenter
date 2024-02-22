@@ -43,6 +43,11 @@ export const Home = () => {
     }
 
     useEffect(() => {
+        if (clientsList.length === 0) return;
+        saveClientsList(user, {clients: clientsList}, false);
+    }, [clientsList])
+
+    useEffect(() => {
         fetchClients();
     }, []);
 

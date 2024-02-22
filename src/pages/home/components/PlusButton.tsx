@@ -23,7 +23,7 @@ export const PlusButton = ({onClick, todosBtn = false}: PlusButtonProps) => {
             </div>
 
             <div {...stylex.props(s.div, s.saveBtn)} onClick={onClick}>
-                <i className='fa-solid fa-floppy-disk'/>
+                <i className='fa-solid fa-floppy-disk' id='plus-btn'/>
             </div>
 
 
