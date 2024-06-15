@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# Persona Center
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Persona Center Logo](./public/ic.svg)  
 
-Currently, two official plugins are available:
+### ¡Bienvenido a **Persona Center**!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Persona Center** es la herramienta perfecta para gestionar tus clientes y mantener toda la información organizada y accesible. Ideal para pequeñas y medianas empresas que buscan eficiencia y simplicidad.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Características
 
-- Configure the top-level `parserOptions` property like this:
+- **Gestión de Clientes**: Añade, edita y organiza la información de tus clientes.
+- **Historial de Actividades**: Mantén un registro de todas las interacciones con tus clientes.
+- **Alertas y Recordatorios**: Recibe notificaciones sobre eventos importantes relacionados con tus clientes.
+- **Búsqueda y Filtros Avanzados**: Encuentra rápidamente a cualquier cliente usando filtros avanzados.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+![Screenshot de la gestión de clientes](./public/pc.png)  
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+---
+
+## Instalación
+
+1. **Clona el repositorio**:
+   ```sh
+   git clone https://github.com/tuusuario/PersonaCenter.git
+   ```
+2. **Instala las dependencias**:
+   ```sh
+    npm install
+    ```
+3. **Inicia la aplicación**:
+    ```sh
+    npm start
+    ```
+    4. Configura Firebase:
+    ```sh
+    Crea un proyecto en Firebase y configura las credenciales en el archivo `src/firebase.js`
+    ```
+---
+
+## Uso
+
+1. Inicio de Sesión
+2. Gestión de Clientes
+3. Historial de Actividades
+
+---
+
+## Tecnologías
+
+- **React**: Frontend
+- **Firebase**: Base de Datos
+- **Redux**: Estado Global
+- **StyleX**: Estilos
+
+---
+
+## Contribución
+
+1. Realiza un **fork** del proyecto
+2. Crea una **rama** para tu contribución
+3. Realiza un **pull request**
+4. ¡Espera a que tu contribución sea aceptada!
