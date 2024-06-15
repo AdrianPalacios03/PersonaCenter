@@ -27,8 +27,24 @@ export const Todos = () => {
     const [showDList, setShowDList] = useState(false);
 
     const fetchTodos = async () => {
-        await getTodos(user).then(async (todos) => {
-            setTodosList(todos);
+        await getTodos(user).then(async (todos: Todo[]) => {
+            // Buscar todo que tenga el titulo "1200 de la semana", si existe y hoy es miércoles, cambiar su done a false
+            const isWed = new Date().getDay() === 3;
+
+            if (isWed) {
+                const newTodosList = todos.map((todo) => {
+                    if (todo.title === '1200 de la semana') {
+                        return {
+                            ...todo,
+                            done: false
+                        }
+                    }
+                    return todo;
+                });
+                setTodosList(newTodosList);
+            } else {
+                setTodosList(todos);
+            }
         })
     }
 
@@ -43,8 +59,13 @@ export const Todos = () => {
         setStyleValue(style)
     }, []);
 
+    useEffect(() => {
+        if (todosList.length === 0) return;
+        saveTodosList(user, {todos: todosList}, false);
+    }, [todosList])
+
     const saveTodos = () => {
-        saveTodosList(user, {todos: todosList});
+        saveTodosList(user, {todos: todosList})
     }
 
     const handleInputChange = (e: any) => {
