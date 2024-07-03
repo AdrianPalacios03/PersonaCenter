@@ -1,4 +1,4 @@
-#Person Center
+# Persona Center
 
 ![Persona Center Logo](./public/ic.svg)
 
