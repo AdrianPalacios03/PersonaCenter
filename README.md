@@ -1,64 +1,64 @@
-# Persona Center
+#Person Center
 
-![Persona Center Logo](./public/ic.svg)  
+![Persona Center Logo](./public/ic.svg)
 
-### ¡Bienvenido a **Persona Center**!
+### Welcome to **Persona Center**!
 
-**Persona Center** es la herramienta perfecta para gestionar tus clientes y mantener toda la información organizada y accesible. Ideal para pequeñas y medianas empresas que buscan eficiencia y simplicidad.
-
----
-
-## Características
-
-- **Gestión de Clientes**: Añade, edita y organiza la información de tus clientes.
-- **Historial de Actividades**: Mantén un registro de todas las interacciones con tus clientes.
-- **Alertas y Recordatorios**: Recibe notificaciones sobre eventos importantes relacionados con tus clientes.
-- **Búsqueda y Filtros Avanzados**: Encuentra rápidamente a cualquier cliente usando filtros avanzados.
-
-![Screenshot de la gestión de clientes](./public/pc.png)  
+**Persona Center** is the perfect tool to manage your clients and keep all the information organized and accessible. Ideal for small and medium-sized businesses looking for efficiency and simplicity.
 
 ---
 
-## Instalación
+## Features
 
-1. **Clona el repositorio**:
-   ```sh
-   git clone https://github.com/tuusuario/PersonaCenter.git
-   ```
-2. **Instala las dependencias**:
-   ```sh
-    npm install
-    ```
-3. **Inicia la aplicación**:
-    ```sh
-    npm start
-    ```
-    4. Configura Firebase:
-    ```sh
-    Crea un proyecto en Firebase y configura las credenciales en el archivo `src/firebase.js`
-    ```
----
+- **Customer Management**: Add, edit, and organize your customers' information.
+- **Activity History**: Keep a record of all interactions with your customers.
+- **Alerts and Reminders**: Receive notifications about important events related to your clients.
+- **Advanced Search and Filters**: Quickly find any client using advanced filters.
 
-## Uso
-
-1. Inicio de Sesión
-2. Gestión de Clientes
-3. Historial de Actividades
+![Screenshot of customer management](./public/pc.png)
 
 ---
 
-## Tecnologías
+## Get Started
+
+1. **Clone the repository**:
+ ```sh
+ git clone https://github.com/tuusuario/PersonaCenter.git
+ ```
+2. **Install the dependencies**:
+ ```sh
+ npm install
+ ```
+3. **Start the application**:
+ ```sh
+ npm start
+ ```
+ 4. Configure Firebase:
+ ```sh
+ Create a project in Firebase and configure the credentials in the `src/firebase.js` file
+ ```
+---
+
+## Usage
+
+1. Login
+2. Customer Management
+3. Activity History
+
+---
+
+## Technologies
 
 - **React**: Frontend
-- **Firebase**: Base de Datos
-- **Redux**: Estado Global
-- **StyleX**: Estilos
+- **Firebase**: Database
+- **Redux**: Global State
+- **StyleX**: Styles
 
 ---
 
-## Contribución
+## Contribution
 
-1. Realiza un **fork** del proyecto
-2. Crea una **rama** para tu contribución
-3. Realiza un **pull request**
-4. ¡Espera a que tu contribución sea aceptada!
+1. Make a **fork** of the project
+2. Create a **branch** for your contribution
+3. Make a **pull request**
+4. Wait for your contribution to be accepted!
